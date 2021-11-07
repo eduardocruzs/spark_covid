@@ -24,7 +24,7 @@ criar-diretorio-tz: ## Run para criar diretório no HDFS para armazenar dados br
 # make criar-diretorio-tz
 
 listar-diretorio-tz: ## Run para listar diretório tz no HDFS - Transient Zone (Zone transitório)
-	  docker exec namenode hdfs dfs -ls $(TZ)covid/
+	  docker exec namenode hdfs dfs -ls $(TZ)
 # make listar-diretorio-tz
 
 limpar-diretorio-tz: ## Run para criar diretório no HDFS para armazenar dados brutos - Transient Zone (Zone transitório)
@@ -43,4 +43,8 @@ enviar-arquivos-tz: ## Exec para enviar arquivos do container para o HDFS. Depoi
 
 ver-arquivo-tz: ## Exec para enviar arquivos do container para o HDFS. Depois do PUT, os arquivos são listados.
 	  docker exec namenode hdfs dfs -cat $(TZ)covid/HIST_PAINEL_COVIDBR_2020_Parte1_06jul2021.csv | head -n 2
+# make ver-arquivo-tz
+
+ver-warehouse: ## Exec para enviar arquivos do container para o HDFS. Depois do PUT, os arquivos são listados.
+	  docker exec namenode hdfs dfs -ls $(WAREHOUSE)covid/
 # make ver-arquivo-tz
