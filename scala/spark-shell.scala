@@ -16,6 +16,8 @@ val covidSchema = StructType(columnsList)
 val covidDF = spark.read.option("header","true").option("delimiter", ";").schema(covidSchema).csv("/user/eduardo/spark_covid/tz/covid/*.csv")
 
 // Salvar dados em uma tabela hive particionada por "municipio"
+/*OBS: Por padrão existe o limite do número de partições, e o numero de municípios ultrapassa o limite,
+sendo necessário ao iniciar o spark-shell usar a configuração:  --conf spark.hadoop.hive.exec.max.dynamic.partitions=30000*/
 covidDF.write.mode("overwrite").partitionBy("municipio").format("hive").saveAsTable("covid")
 
 /*
@@ -53,15 +55,15 @@ Gerando a visualização do Total de:
  // Salvando a visualização de Casos Confirmados em formato parquet e compressão snappy
  casosConfirmados.write.mode("overwrite").option("compression", "snappy").parquet("/user/eduardo/casosConfirmados")
 
- // PENDENTE # Salvando a visualização de Obitos Confirmados em um topico no KAFKA
- obitosConfirmados.selectExpr("CAST(key AS STRING)", "CAST(value AS STRING)").write.format("kafka").option("kafka.bootstrap.servers", "kafka:9092").option("topic", "topic-obitosConfirmados").save()
+ // Salvando a visualização de Obitos Confirmados em um topico no KAFKA
+ obitosConfirmados.selectExpr("to_json(struct(*)) AS value").write.format("kafka").option("kafka.bootstrap.servers", "kafka:9092").option("topic", "topic-obitosConfirmados").save()
 
  // Criar visualização da Sintese dos dados de casos, obitos, incidencia e mortalidade.
  // - Nessa primeira etapa foi feito o agrupamento por estado e região. 
  val sinteseEstados = covidDF.filter(covidDF("regiao") .isNotNull).groupBy("estado", "regiao").agg(max("casosAcumulado").alias("casosAcumulado"), max("obitosAcumulado").alias("obitosAcumulado"), max("populacaoTCU2019").alias("populacaoTCU2019"), last("data").alias("data")).sort(asc("regiao"),asc("estado"),desc("data"))
  // Nessa etapa foi feito o resumo por Região
- val sinteseRegiao = sinteseEstados.groupBy("regiao").agg(sum("casosAcumulado").alias("Casos"), sum("obitosAcumulado").alias("Obitos"), sum("populacaoTCU2019")alias("populacaoRegiao"), last("data").alias("Atualizacao")).sort(asc("regiao"))
- // Nessa é feito o resultado geral, incluindo os cálculos de incidencia e mortalidade.
+ val sinteseRegiao = sinteseEstados.groupBy("regiao").agg(sum("casosAcumulado").alias("Casos"), sum("obitosAcumulado").alias("Obitos"), sum("populacaoTCU2019").alias("populacaoRegiao"), last("data").alias("Atualizacao")).sort(asc("regiao"))
+ // Nessa etapa é feito o resultado geral, incluindo os cálculos de incidencia e mortalidade.
  val sinteseGeral = sinteseRegiao.withColumn("Incidencia", (sinteseRegiao("Casos") / sinteseRegiao("populacaoRegiao")) * 100000).withColumn("Mortalidade", (sinteseRegiao("Obitos") / sinteseRegiao("populacaoRegiao")) * 100000)
  // Para finalizar, nessa etapa foi feita a formatação dos valores para uma melhor leitura. 
  val sinteseFinal = sinteseGeral.groupBy("regiao").agg(format_number(last("Casos"),1).alias("Casos"),format_number(last("Obitos"),1).alias("Obitos"),format_number(last("Incidencia"),1).alias("Incidencia"),format_number(last("Mortalidade"),1).alias("Mortalidade"),last("Atualizacao").alias("Atualizacao"))
