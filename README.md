@@ -48,3 +48,31 @@ Projeto para integrar dados públicos da COVID e gerar análises.
 
 **/input_files** - Diretório contendo os arquivos csv integrados.
 
+## Visualização dos resultados gerados a partir do spark-shell 
+
+Gerando a visualização do Total de:
+- Casos Recuperados 
+- Em Acompanhamento
+![image](https://user-images.githubusercontent.com/79167966/140811106-7f110f09-ce83-436a-a502-992a00c94c44.png)
+
+Gerando a visualização do Total de:
+- Casos Confirmados
+  - Acumulado
+  - Casos novos 
+  - Incidência 
+ ![image](https://user-images.githubusercontent.com/79167966/140811278-d5a0eb42-0213-4209-9217-ec6f763f337a.png)
+
+Gerando a visualização do Total de:
+ - Óbitos Confirmados
+   - Acumulado
+   - Casos Novos
+   - Letalidade
+   - Mortalidade 
+![image](https://user-images.githubusercontent.com/79167966/140811416-beed766b-5a8a-4123-80c7-c98914b4a8bf.png)
+
+Salvando a visualização de Obitos Confirmados em um topico no KAFKA e demonstrando o resultado a partir de um consumer no KAFKA
+![image](https://user-images.githubusercontent.com/79167966/140811575-25d96c44-36cb-4482-ac2a-be149c10e04d.png)
+
+Gerando a visualização da Sintese dos dados de casos, obitos, incidencia e mortalidade.
+![image](https://user-images.githubusercontent.com/79167966/140812433-e2d1bc75-6b16-4ce7-876f-bc4c02a513b5.png)
+
