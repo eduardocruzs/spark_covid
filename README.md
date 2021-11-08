@@ -15,7 +15,7 @@ Projeto para integrar dados públicos da COVID e gerar análises.
 - **Etapa 3:**
     * Transformação de todo código em uma aplicação spark
 
-Arquivos: 
+### Arquivos: 
 
 **Makefile** - Foi criado esse Makefile para simplificar a execução de comandos dentro dos containers e o uso de variáveis de ambiente. 
 
@@ -42,3 +42,4 @@ Arquivos:
 **.env** - Arquivo que contém as variáveis de ambiente que será enviadas para o container na execução dos comandos make.
 
 **spark-shell.scala** - Arquivo com todo o código para execução das etapas do projeto dentro do skark-shell
+
