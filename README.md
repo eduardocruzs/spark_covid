@@ -53,6 +53,7 @@ Projeto para integrar dados públicos da COVID e gerar análises.
 Gerando a visualização do Total de:
 - Casos Recuperados 
 - Em Acompanhamento
+
 ![image](https://user-images.githubusercontent.com/79167966/140811106-7f110f09-ce83-436a-a502-992a00c94c44.png)
 
 Gerando a visualização do Total de:
@@ -60,14 +61,16 @@ Gerando a visualização do Total de:
   - Acumulado
   - Casos novos 
   - Incidência 
- ![image](https://user-images.githubusercontent.com/79167966/140811278-d5a0eb42-0213-4209-9217-ec6f763f337a.png)
+
+![image](https://user-images.githubusercontent.com/79167966/140811278-d5a0eb42-0213-4209-9217-ec6f763f337a.png)
 
 Gerando a visualização do Total de:
  - Óbitos Confirmados
    - Acumulado
    - Casos Novos
    - Letalidade
-   - Mortalidade 
+   - Mortalidade
+
 ![image](https://user-images.githubusercontent.com/79167966/140811416-beed766b-5a8a-4123-80c7-c98914b4a8bf.png)
 
 Salvando a visualização de Obitos Confirmados em um topico no KAFKA e demonstrando o resultado a partir de um consumer no KAFKA
