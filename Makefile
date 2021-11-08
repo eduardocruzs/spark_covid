@@ -5,9 +5,6 @@ export $(shell sed 's/=.*//' $(cnf))
 # Get the latest tag
 TAG=$(shell git describe --tags --abbrev=0)
 GIT_COMMIT=$(shell git log -1 --format=%h)
-TERRAFORM_VERSION=1.0.5
-INPUT=/input/covid/
-TZ=/user/eduardo/spark_covid/tz/
 
 # HELP
 # This will output the help for each task
@@ -19,32 +16,32 @@ help: ## This help.
 
 .DEFAULT_GOAL := help
 
-criar-diretorio-tz: ## Run para criar diretório no HDFS para armazenar dados brutos - Transient Zone (Zone transitório)
+mkdir-diretorio-tz: ## Run para criar diretório no HDFS para armazenar dados brutos - Transient Zone (Zone transitório)
 	  docker exec namenode hdfs dfs -mkdir -p $(TZ)
-# make criar-diretorio-tz
+# make mkdir-diretorio-tz
 
-listar-diretorio-tz: ## Run para listar diretório tz no HDFS - Transient Zone (Zone transitório)
+ls-diretorio-tz: ## Run para listar diretório tz no HDFS - Transient Zone (Zone transitório)
 	  docker exec namenode hdfs dfs -ls $(TZ)
-# make listar-diretorio-tz
+# make ls-diretorio-tz
 
-limpar-diretorio-tz: ## Run para criar diretório no HDFS para armazenar dados brutos - Transient Zone (Zone transitório)
+rm-diretorio-tz: ## Run para remover tudo no HDFS na pasta TZ - Transient Zone (Zone transitório)
 	  docker exec namenode hdfs dfs -rm -r -f $(TZ)
-# make limpar-diretorio-tz
+# make rm-diretorio-tz
 
-enviar-arquivos-namenode: ## Exec para enviar arquivos contendo os dados para dentro do container namenode. Depois de copia, os arquivos são listados.
+cp-arquivos-namenode: ## Exec para enviar arquivos contendo os dados para dentro do container namenode. Depois de copia, os arquivos são listados.
 	  docker cp $$PWD/input_files/ namenode:$(INPUT)
 	  docker exec namenode ls $(INPUT)
-# make enviar-arquivos-namenode
+# make cp-arquivos-namenode
 
-enviar-arquivos-tz: ## Exec para enviar arquivos do container para o HDFS. Depois do PUT, os arquivos são listados.
+put-arquivos-tz: ## Exec para enviar arquivos do container para o HDFS. Depois do PUT, os arquivos são listados.
 	  docker exec namenode hdfs dfs -put -f $(INPUT) $(TZ)
 	  docker exec namenode hdfs dfs -ls $(TZ)covid/
-# make enviar-arquivos-tz
+# make put-arquivos-tz
 
 ver-arquivo-tz: ## Exec para enviar arquivos do container para o HDFS. Depois do PUT, os arquivos são listados.
 	  docker exec namenode hdfs dfs -cat $(TZ)covid/HIST_PAINEL_COVIDBR_2020_Parte1_06jul2021.csv | head -n 2
 # make ver-arquivo-tz
 
-ver-warehouse: ## Exec para enviar arquivos do container para o HDFS. Depois do PUT, os arquivos são listados.
+ls-warehouse: ## Exec para listar diretorio no warehouse - HIVE. 
 	  docker exec namenode hdfs dfs -ls $(WAREHOUSE)covid/
-# make ver-arquivo-tz
+# make ls-arquivo-tz
