@@ -19,9 +19,9 @@ Arquivos:
 
 **Makefile** - Foi criado esse Makefile para simplificar a execução de comandos dentro dos containers e o uso de variáveis de ambiente. 
 
-    - Nele foram criadas as seguintes rotinas: 
+    #### Nele foram criadas as seguintes rotinas: 
 
-        **make help**                           Exibe essa ajuda, com a lista de comandos e o que cada um faz. 
+        `make help`                           Exibe essa ajuda, com a lista de comandos e o que cada um faz. 
 
         **make mkdir-diretorio-tz**             Run para criar diretório no HDFS para armazenar dados brutos Transient Zone (Zone transitório).
 
