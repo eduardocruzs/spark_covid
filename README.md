@@ -43,7 +43,8 @@ Projeto para integrar dados públicos da COVID e gerar análises.
 
 **/scala/spark-shell.scala** - Arquivo com todo o código para execução das etapas do projeto dentro do skark-shell.
 
-**/pyspark/spark_covid.ipynb** - arquivo do Jupyter Notebook com todas as demandas do projeto em python. 
+**/pyspark/spark_covid.ipynb** - arquivo do Jupyter Notebook com todas as demandas do projeto em python.
+- Acesso via navegador ao jupyter-notebook: http://35.226.139.23:8889/notebooks/spark_covid.ipynb# 
 
 **/input_files** - Diretório contendo os arquivos csv integrados.
 
