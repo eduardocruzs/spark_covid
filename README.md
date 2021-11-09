@@ -41,7 +41,7 @@ Projeto para integrar dados públicos da COVID e gerar análises.
 
     
 
-**.env** - Arquivo que contém as variáveis de ambiente que será enviadas para o container na execução dos comandos make.
+**.env** - Arquivo que contém as variáveis de ambiente que serão enviadas para o container na execução dos comandos make.
 
 **/scala/spark-shell.scala** - Arquivo com todo o código para execução das etapas do projeto dentro do skark-shell.
 
