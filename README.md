@@ -8,9 +8,11 @@ Projeto para integrar dados públicos da COVID e gerar análises.
     * Envio dos arquivos para dentro do container
     * Envio dos arquivos do container para o HDFS
     * Execução de todas as demandas do projeto a partir do spark-shell
+    - Pendência - integração com elastic e dashboard
 
 - **Etapa 2:** 
     * Execução de todas as demandas do projeto a partir do jupyter-notebook
+    - Pendência - integração com elastic e dashboard
 
 - **Etapa 3:**
     * Transformação de todo código em uma aplicação spark
