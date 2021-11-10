@@ -68,3 +68,12 @@ Gerando a visualização do Total de:
  // Para finalizar, nessa etapa foi feita a formatação dos valores para uma melhor leitura. 
  val sinteseFinal = sinteseGeral.groupBy("regiao").agg(format_number(last("Casos"),1).alias("Casos"),format_number(last("Obitos"),1).alias("Obitos"),format_number(last("Incidencia"),1).alias("Incidencia"),format_number(last("Mortalidade"),1).alias("Mortalidade"),last("Atualizacao").alias("Atualizacao"))
  sinteseFinal.show()
+
+ /*
+  Salvar a visualização no elasticsearch.
+  Para que seja possível fazer a integração com o elastich é necessário baixar o jar de integração: elasticsearch-spark-20_2.11-7.15.1.jar
+  Esse jar foi inserido no container jupyter-spark:/opt/spark/jars/
+  */
+  // importar dependencia
+  import org.elasticsearch.spark._
+  obitosConfirmados.write.format("org.elasticsearch.spark.sql").option("es.port","9200").option("es.nodes", "elasticsearch").mode("Overwrite").save("indexcovid/obitosConfirmados")
