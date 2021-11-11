@@ -76,4 +76,38 @@ Gerando a visualização do Total de:
   */
   // importar dependencia
   import org.elasticsearch.spark._
-  obitosConfirmados.write.format("org.elasticsearch.spark.sql").option("es.port","9200").option("es.nodes", "elasticsearch").mode("Overwrite").save("indexcovid/obitosConfirmados")
+  // Enviar dataframe covidDF
+  covidDF.write.format("org.elasticsearch.spark.sql").option("es.port","9200").option("es.nodes", "elasticsearch").mode("Overwrite").save("coviddados")
+  
+  // Enviar todas as visuações montadas para geração do dashboard. 
+
+/*
+Enviando a visualização do Total de:
+- Casos Recuperados 
+- Em Acompanhamento
+*/
+casosRecAcom.write.format("org.elasticsearch.spark.sql").option("es.port","9200").option("es.nodes", "elasticsearch").mode("Overwrite").save("casosrecacom")
+
+/* 
+Enviando a visualização do Total de:
+- Casos Confirmados
+  - Acumulado
+  - Casos novos 
+  - Incidência 
+*/
+casosConfirmados.write.format("org.elasticsearch.spark.sql").option("es.port","9200").option("es.nodes", "elasticsearch").mode("Overwrite").save("casosconfirmados")
+
+/* 
+ Enviando a visualização do Total de:
+ - Óbitos Confirmados
+   - Acumulado
+   - Casos Novos
+   - Letalidade
+   - Mortalidade 
+ */
+obitosConfirmados.write.format("org.elasticsearch.spark.sql").option("es.port","9200").option("es.nodes", "elasticsearch").mode("Overwrite").save("obitosconfirmados")
+
+// Enviando visualização da Sintese dos dados de casos, obitos, incidencia e mortalidade.
+sinteseFinal.write.format("org.elasticsearch.spark.sql").option("es.port","9200").option("es.nodes", "elasticsearch").mode("Overwrite").save("sintesefinal")
+
+  

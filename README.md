@@ -10,6 +10,9 @@ Projeto para integrar dados públicos da COVID e gerar análises.
     * Execução de todas as demandas do projeto a partir do spark-shell
     * Integração com o KAFKA OK
     * Integração com o ELASTICSEARCH OK
+    * Desenhado Dashboad no Kibana - Link de acesso abaixo:
+    ### Dashboard - Dados Covid - Eduardo Cruz - Projeto Final Academy Semantix
+    http://104.197.191.85:5601/app/dashboards#/view/05983ef0-4285-11ec-9dba-270c2f86924e?_g=(filters%3A!()%2CrefreshInterval%3A(pause%3A!t%2Cvalue%3A0)%2Ctime%3A(from%3Anow-15m%2Cto%3Anow))
 
 - **Etapa 2:** 
     * Execução de todas as demandas do projeto a partir do jupyter-notebook
@@ -47,7 +50,6 @@ Projeto para integrar dados públicos da COVID e gerar análises.
 **/scala/spark-shell.scala** - Arquivo com todo o código para execução das etapas do projeto dentro do skark-shell.
 
 **/pyspark/spark_covid.ipynb** - arquivo do Jupyter Notebook com todas as demandas do projeto em python.
-- Acesso via navegador ao jupyter-notebook: http://35.226.139.23:8889/notebooks/spark_covid.ipynb# 
 
 **/input_files** - Diretório contendo os arquivos csv integrados.
 
